@@ -102,4 +102,15 @@
       </form>
     </div>
   </div>
+  <hr />
+  <div class="row" *ngIf="formRef.submitted">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h3>User Info:</h3>
+      <p>Username: {{ userinfo.username }}</p>
+      <p>Email: {{ userinfo.email }}</p>
+      <p>Gender: {{ userinfo.gender }}</p>
+      <p>User's first: {{ userinfo.secret }}</p>
+      <p>Answer: {{ userinfo.secretAnswer }}</p>
+    </div>
+  </div>
 </div>
