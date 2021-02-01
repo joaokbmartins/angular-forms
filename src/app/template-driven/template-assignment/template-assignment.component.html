@@ -1,0 +1,121 @@
+<div class="container-assignment">
+  <fieldset>
+    <div class="row">
+      <div class="col-md-12">
+        <legend>Assignment</legend>
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+          <div
+            class="register-form"
+            ngModelGroup="formGroup"
+            name="formGroup"
+            #formGroup="ngModelGroup"
+          >
+            <div class="form-group">
+              <label for="email" class="label">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                [ngModel]="'test@email.com'"
+                name="email"
+                #email="ngModel"
+                email
+                required
+              />
+              <small class="help-block" *ngIf="email.touched && !email.valid">
+                Please, enter a valid email.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="subLevel" class="label">Subscripiton</label>
+              <select
+                name="subLevel"
+                id="subLevel"
+                [ngModel]="defaultSubLevel"
+                name="subLevel"
+                #subLevel="ngModel"
+                required
+                class="form-control"
+              >
+                <option value="">Select</option>
+                <option value="basic">Basic</option>
+                <option value="advanced">Advanced</option>
+                <option value="pro">Pro</option>
+              </select>
+              <small
+                class="help-block"
+                *ngIf="subLevel.touched && !subLevel.valid"
+              >
+                Please, select a subscription mode.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="password" class="label">Password</label>
+              <input
+                type="password"
+                [ngModel]="'asdf'"
+                name="password"
+                #password="ngModel"
+                required
+                class="form-control"
+              />
+              <small
+                class="help-block"
+                *ngIf="password.touched && !password.valid"
+              >
+                Please, enter a valid password.
+              </small>
+            </div>
+          </div>
+          <small
+            class="help-block"
+            *ngIf="formGroup.touched && !formGroup.valid"
+          >
+            There are invalid values.
+          </small>
+          <p>
+            <button
+              [disabled]="!loginForm.valid"
+              class="btn btn-success"
+              type="submit"
+            >
+              Submit
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="row" *ngIf="loginForm.submitted">
+      <div class="col-md-12">
+        <p>Data entered:</p>
+        <span>Email: {{ loginData.email }} </span>
+        <br />
+        <span>
+          Password:
+          {{
+            isPasswordVisible
+              ? loginData.password
+              : "*".repeat(loginData.password.length)
+          }}
+          <button (click)="isPasswordVisible = !isPasswordVisible">
+            <span
+              [class]="{
+                'glyphicon glyphicon-eye-open': isPasswordVisible,
+                'glyphicon glyphicon-eye-close': !isPasswordVisible
+              }"
+            ></span>
+          </button>
+        </span>
+        <br />
+        <span>Subscription: {{ loginData.subscriptionLevel }} </span>
+      </div>
+    </div>
+  </fieldset>
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+  </button>
+</div>
+<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
