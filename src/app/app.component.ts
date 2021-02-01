@@ -7,6 +7,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  defaultQuestion: string = 'teacher';
+  answer: string = null;
+  genders: string[] = ['female', 'male'];
+
   onSubmit(form: NgForm) {
     console.log('Submitted!', form);
   }
