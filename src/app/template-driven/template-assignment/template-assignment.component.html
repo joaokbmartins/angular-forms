@@ -4,74 +4,67 @@
       <div class="col-md-12">
         <legend>Assignment</legend>
         <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
-          <div
-            class="register-form"
-            ngModelGroup="formGroup"
-            name="formGroup"
-            #formGroup="ngModelGroup"
-          >
-            <div class="form-group">
-              <label for="email" class="label">Email</label>
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                [ngModel]="'test@email.com'"
-                name="email"
-                #email="ngModel"
-                email
-                required
-              />
-              <small class="help-block" *ngIf="email.touched && !email.valid">
-                Please, enter a valid email.
-              </small>
-            </div>
-            <div class="form-group">
-              <label for="subLevel" class="label">Subscripiton</label>
-              <select
-                name="subLevel"
-                id="subLevel"
-                [ngModel]="defaultSubLevel"
-                name="subLevel"
-                #subLevel="ngModel"
-                required
-                class="form-control"
-              >
-                <option value="">Select</option>
-                <option value="basic">Basic</option>
-                <option value="advanced">Advanced</option>
-                <option value="pro">Pro</option>
-              </select>
-              <small
-                class="help-block"
-                *ngIf="subLevel.touched && !subLevel.valid"
-              >
-                Please, select a subscription mode.
-              </small>
-            </div>
-            <div class="form-group">
-              <label for="password" class="label">Password</label>
-              <input
-                type="password"
-                [ngModel]="'asdf'"
-                name="password"
-                #password="ngModel"
-                required
-                class="form-control"
-              />
-              <small
-                class="help-block"
-                *ngIf="password.touched && !password.valid"
-              >
-                Please, enter a valid password.
-              </small>
-            </div>
+          <div class="form-group">
+            <label for="email" class="label">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              [ngModel]="'test@email.com'"
+              name="email"
+              #email="ngModel"
+              email
+              required
+            />
+            <small class="help-block" *ngIf="email.touched && !email.valid">
+              Please, enter a valid email.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="subLevel" class="label">Subscripiton</label>
+            <select
+              name="subLevel"
+              id="subLevel"
+              [ngModel]="defaultSubLevel"
+              name="subLevel"
+              #subLevel="ngModel"
+              required
+              class="form-control"
+            >
+              <option value="">Select</option>
+              <option value="basic">Basic</option>
+              <option value="advanced">Advanced</option>
+              <option value="pro">Pro</option>
+            </select>
+            <small
+              class="help-block"
+              *ngIf="subLevel.touched && !subLevel.valid"
+            >
+              Please, select a subscription mode.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="password" class="label">Password</label>
+            <input
+              type="password"
+              [ngModel]="'asdf'"
+              name="password"
+              #password="ngModel"
+              required
+              class="form-control"
+            />
+            <small
+              class="help-block"
+              *ngIf="password.touched && !password.valid"
+            >
+              Please, enter a valid password.
+            </small>
           </div>
           <small
             class="help-block"
-            *ngIf="formGroup.touched && !formGroup.valid"
+            *ngIf="loginForm.touched && !loginForm.valid"
           >
-            There are invalid values.
+            The form is invalid.
           </small>
           <p>
             <button

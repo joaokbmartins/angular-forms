@@ -28,9 +28,9 @@ export class TemplateAssignmentComponent implements OnInit {
   }
 
   doLogin(form: NgForm) {
-    this.loginData.email = form.value['formGroup'].email;
-    this.loginData.subscriptionLevel = form.value['formGroup'].subLevel;
-    this.loginData.password = form.value['formGroup'].password;
+    this.loginData.email = form.value.email;
+    this.loginData.subscriptionLevel = form.value.subLevel;
+    this.loginData.password = form.value.password;
   }
 
   doResetForm(form: NgForm) {
