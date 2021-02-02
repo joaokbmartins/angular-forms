@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username" class="label">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+        />
+        <small>Field required</small>
+      </div>
+      <div class="form-group">
+        <label for="email" class="label">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+        />
+        <small>Field required</small>
+      </div>
+      <div class="form-group">
+        <label for="gender" class="label">Gender</label>
+        <div *ngFor="let gender of genders">
+          <label [for]="gender" class="label">
+            <input
+              type="radio"
+              [id]="gender"
+              [value]="gender"
+              formControlName="gender"
+            />
+            {{ gender }}
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-sm btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
