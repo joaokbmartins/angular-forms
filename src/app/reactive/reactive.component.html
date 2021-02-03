@@ -10,14 +10,17 @@
             class="form-control"
             formControlName="username"
           />
-          <small
+          <div
             *ngIf="
               !loginForm.get('userData.username').valid &&
               loginForm.get('userData.username').touched
             "
           >
-            Field required
-          </small>
+            <div *ngFor="let message of getErrorMessages('userData.username')">
+              <small class="error-message">{{ message }}</small>
+              <br />
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -28,13 +31,16 @@
           formControlName="email"
           class="form-control"
         />
-        <small
+        <div
           *ngIf="
             !loginForm.get('email').valid && loginForm.get('email').touched
           "
         >
-          Email invalid
-        </small>
+          <div *ngFor="let message of getErrorMessages('email')">
+            <small class="error-message">{{ message }}</small>
+            <br />
+          </div>
+        </div>
       </div>
       <div formGroupName="userData">
         <div class="form-group">
@@ -53,17 +59,18 @@
         </div>
       </div>
       <div class="form-group" formArrayName="hobbies">
-        <h4>Hobbies</h4>
-        <button
-          type="button"
-          (click)="onAddHobbie()"
-          class="btn btn-sm btn-warning"
-        >
-          New Hobbie
-        </button>
-        <hr />
+        <div class="hobbies-header">
+          <h4>Hobbies</h4>
+          <button
+            type="button"
+            (click)="onAddHobbie()"
+            class="btn btn-sm btn-warning"
+          >
+            New Hobbie
+          </button>
+        </div>
         <div
-          class="hobbies input-group mb-3"
+          class="hobbies-body input-group mb-3"
           *ngFor="
             let hobbie of this.loginForm.get('hobbies')['controls'];
             let i = index
