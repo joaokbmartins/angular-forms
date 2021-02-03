@@ -1,15 +1,24 @@
 <div class="row">
   <div class="col-md-12">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="username" class="label">Username</label>
-        <input
-          type="text"
-          id="username"
-          formControlName="username"
-          class="form-control"
-        />
-        <small>Field required</small>
+      <div formGroupName="userData">
+        <div class="form-group">
+          <label for="username" class="label">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            formControlName="username"
+          />
+          <small
+            *ngIf="
+              !loginForm.get('userData.username').valid &&
+              loginForm.get('userData.username').touched
+            "
+          >
+            Field required
+          </small>
+        </div>
       </div>
       <div class="form-group">
         <label for="email" class="label">Email</label>
@@ -19,24 +28,63 @@
           formControlName="email"
           class="form-control"
         />
-        <small>Field required</small>
+        <small
+          *ngIf="
+            !loginForm.get('email').valid && loginForm.get('email').touched
+          "
+        >
+          Email invalid
+        </small>
       </div>
-      <div class="form-group">
-        <label for="gender" class="label">Gender</label>
-        <div *ngFor="let gender of genders">
-          <label [for]="gender" class="label">
-            <input
-              type="radio"
-              [id]="gender"
-              [value]="gender"
-              formControlName="gender"
-            />
-            {{ gender }}
-          </label>
+      <div formGroupName="userData">
+        <div class="form-group">
+          <label for="gender" class="label">Gender</label>
+          <div *ngFor="let gender of genders">
+            <label [for]="gender" class="label">
+              <input
+                type="radio"
+                [id]="gender"
+                [value]="gender"
+                formControlName="gender"
+              />
+              {{ gender }}
+            </label>
+          </div>
         </div>
       </div>
+      <div class="form-group" formArrayName="hobbies">
+        <h4>Hobbies</h4>
+        <button
+          type="button"
+          (click)="onAddHobbie()"
+          class="btn btn-sm btn-warning"
+        >
+          New Hobbie
+        </button>
+        <hr />
+        <div
+          class="hobbies input-group mb-3"
+          *ngFor="
+            let hobbie of this.loginForm.get('hobbies')['controls'];
+            let i = index
+          "
+        >
+          <span class="input-group-text">{{ i + 1 + "º Hobbie" }}</span>
+          <input
+            type="text"
+            [name]="loginForm.get('hobbies')['controls'][i]"
+            [formControlName]="i"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <small *ngIf="!loginForm.valid && loginForm.touched">
+        The for is invalid
+      </small>
       <div class="form-group">
-        <button class="btn btn-sm btn-primary">Submit</button>
+        <button [disabled]="!loginForm.valid" class="btn btn-sm btn-primary">
+          Submit
+        </button>
       </div>
     </form>
   </div>
