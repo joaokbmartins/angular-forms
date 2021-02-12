@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-reactive',
@@ -12,6 +14,8 @@ export class ReactiveComponent implements OnInit {
   forbiddenNames: string[];
   errors: { [key: string]: string };
 
+  constructor(private http: HttpClient) {}
+
   ngOnInit() {
     this.forbiddenNames = ['Tonny', 'Wayne'];
     this.errors = {
@@ -22,14 +26,18 @@ export class ReactiveComponent implements OnInit {
     };
     this.loginForm = new FormGroup({
       userData: new FormGroup({
-        username: new FormControl(null, [
+        username: new FormControl('batatapalha', [
           Validators.required,
           this.forbiddenNamesValidator.bind(this),
           this.minLengthValidator.bind(this),
         ]),
         gender: new FormControl('male', [Validators.required]),
       }),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      email: new FormControl(
+        null,
+        [Validators.required, Validators.email],
+        this.asyncEmailValidator
+      ),
       hobbies: new FormArray([]),
     });
   }
@@ -46,20 +54,6 @@ export class ReactiveComponent implements OnInit {
     console.log(this.loginForm.get('hobbies')['controls']);
   }
 
-  forbiddenNamesValidator(control: FormControl): { [key: string]: boolean } {
-    if (this.forbiddenNames.indexOf(control.value) > -1) {
-      return { forbiddenName: true };
-    }
-    return null;
-  }
-
-  minLengthValidator(control: FormControl): { [key: string]: boolean } {
-    if (control.value && (control.value as string).length < 10) {
-      return { minLengthInvalid: true };
-    }
-    return null;
-  }
-
   getErrorMessages(control: string): string[] {
     let errorMessages: string[] = [];
     for (const [key] of Object.entries(this.loginForm.get(control).errors)) {
@@ -70,5 +64,31 @@ export class ReactiveComponent implements OnInit {
 
   onResetForm(): void {
     this.loginForm.reset();
+  }
+
+  minLengthValidator(control: FormControl): { [key: string]: boolean } {
+    if (control.value && (control.value as string).length < 10) {
+      return { minLengthInvalid: true };
+    }
+    return null;
+  }
+
+  forbiddenNamesValidator(control: FormControl): { [key: string]: boolean } {
+    if (this.forbiddenNames.indexOf(control.value) > -1) {
+      return { forbiddenName: true };
+    }
+    return null;
+  }
+
+  asyncEmailValidator(control: FormControl): Promise<any> | Observable<any> {
+    return new Promise((resolve, reject) => {
+      setInterval(() => {
+        if (control.value === 'admin@test.com') {
+          resolve({ forbiddenName: true });
+        } else {
+          resolve(null);
+        }
+      }, 2000);
+    });
   }
 }

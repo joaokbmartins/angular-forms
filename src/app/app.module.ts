@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 import { TemplateAssignmentComponent } from './template-driven/template-assignment/template-assignment.component';
 import { ReactiveComponent } from './reactive/reactive.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AppComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
   ],
   providers: [],
