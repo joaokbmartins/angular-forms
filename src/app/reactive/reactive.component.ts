@@ -46,6 +46,15 @@ export class ReactiveComponent implements OnInit {
     this.loginForm.statusChanges.subscribe((status) => {
       console.log(status);
     });
+    this.loginForm.setValue({
+      userData: {
+        username: 'PACWOMAN',
+        gender: 'famale',
+      },
+      email: 'test@test.com',
+      hobbies: [],
+    });
+    this.loginForm.patchValue({ email: 'test@email.com' });
   }
 
   onSubmit() {
