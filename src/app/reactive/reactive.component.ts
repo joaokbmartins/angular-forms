@@ -40,6 +40,12 @@ export class ReactiveComponent implements OnInit {
       ),
       hobbies: new FormArray([]),
     });
+    // this.loginForm.valueChanges.subscribe((value) => {
+    //   console.log(value);
+    // });
+    this.loginForm.statusChanges.subscribe((status) => {
+      console.log(status);
+    });
   }
 
   onSubmit() {
