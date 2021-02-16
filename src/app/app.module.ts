@@ -8,6 +8,7 @@ import { TemplateDrivenComponent } from './template-driven/template-driven.compo
 import { TemplateAssignmentComponent } from './template-driven/template-assignment/template-assignment.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveAssignmentComponent } from './reactive/reactive-assignment/reactive-assignment.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AppComponent },
@@ -16,7 +17,16 @@ const routes: Routes = [
     component: TemplateDrivenComponent,
     children: [{ path: 'assignment', component: TemplateAssignmentComponent }],
   },
-  { path: 'reactive', component: ReactiveComponent },
+  {
+    path: 'reactive',
+    component: ReactiveComponent,
+    children: [
+      {
+        path: 'assignment',
+        component: ReactiveAssignmentComponent,
+      },
+    ],
+  },
   { path: '**', redirectTo: '' },
 ];
 
@@ -26,6 +36,7 @@ const routes: Routes = [
     TemplateDrivenComponent,
     TemplateAssignmentComponent,
     ReactiveComponent,
+    ReactiveAssignmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,25 @@
+<fieldset>
+  <h3>Assignment:</h3>
+  <hr />
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="usernmae" name="username" />
+      <small>Invalid username</small>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="usernmae" name="email" />
+      <small>Invalid email</small>
+    </div>
+    <div class="form-group">
+      <label for="status">Project Status</label>
+      <select name="status" id="status" class="form-control">
+        <option value="projStatus" *ngFor="let projStatus of projectStatus">
+          {{ projStatus }}
+        </option>
+      </select>
+      <small>Invalid email</small>
+    </div>
+  </form>
+</fieldset>
